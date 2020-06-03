@@ -33,8 +33,8 @@ function orthogonal_test(B::Type{<:AbstractMultipleOrthogonalBasis}, univ::Funct
 
     @testset "Univariate $var" for (var, univ) in [(x, univariate_x), (y, univariate_y)]
         basis = maxdegree_basis(B, (var,), 4)
-        for i in 1:5
-            @test basis.elements[length(basis) + 1 - i] == univ[i]
+        for (i, e) in enumerate(basis)
+            @test e == univ[(length(univ) +1 - i)]
         end
     end
 
@@ -45,8 +45,8 @@ function orthogonal_test(B::Type{<:AbstractMultipleOrthogonalBasis}, univ::Funct
         else
             exps = [(2, 1), (2, 0), (1, 1), (0, 2), (1, 0), (0, 1), (0, 0)]
         end
-        for i in 1:length(monos)
-            @test monos.elements[i] == univariate_x[exps[i][1] + 1] * univariate_y[exps[i][2] + 1]
+        for (i, e) in enumerate(monos)
+            @test e == univariate_x[exps[i][1] + 1] * univariate_y[exps[i][2] + 1]
         end
         monos = basis_covering_monomials(B, monovec([x^4, x^2, x]))
         if even_odd_separated
@@ -54,8 +54,8 @@ function orthogonal_test(B::Type{<:AbstractMultipleOrthogonalBasis}, univ::Funct
         else
             exps = [4, 3, 2, 1, 0]
         end
-        for i in 1:length(monos)
-            @test monos.elements[i] == univariate_x[exps[i] + 1]
+        for (i, e) in enumerate(monos)
+            @test e == univariate_x[exps[i] + 1]
         end
     end
 end

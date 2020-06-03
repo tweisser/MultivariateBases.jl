@@ -1,10 +1,5 @@
 abstract type AbstractPolynomialVectorBasis{PT<:MP.AbstractPolynomialLike, PV<:AbstractVector{PT}} <: AbstractPolynomialBasis end
 
-Base.length(basis::AbstractPolynomialVectorBasis) = length(basis.elements)
-Base.copy(basis::AbstractPolynomialVectorBasis) = typeof(basis)(copy(basis.elements))
-
-MP.nvariables(basis::AbstractPolynomialVectorBasis) = MP.nvariables(basis.elements)
-MP.variables(basis::AbstractPolynomialVectorBasis) = MP.variables(basis.elements)
 MP.monomialtype(::Type{<:AbstractPolynomialVectorBasis{PT}}) where PT = MP.monomialtype(PT)
 
 empty_basis(B::Type{<:AbstractPolynomialVectorBasis{PT, Vector{PT}}}) where PT = B(PT[])

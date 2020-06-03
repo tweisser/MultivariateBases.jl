@@ -1,10 +1,5 @@
 abstract type AbstractMonomialBasis{MT<:MP.AbstractMonomial, MV<:AbstractVector{MT}} <: AbstractPolynomialBasis end
 
-Base.length(basis::AbstractMonomialBasis) = length(basis.elements)
-Base.copy(basis::AbstractMonomialBasis) = typeof(basis)(copy(basis.elements))
-
-MP.nvariables(basis::AbstractMonomialBasis) = MP.nvariables(basis.elements)
-MP.variables(basis::AbstractMonomialBasis) = MP.variables(basis.elements)
 MP.monomialtype(::Type{<:AbstractMonomialBasis{MT}}) where MT = MT
 
 empty_basis(MB::Type{<:AbstractMonomialBasis{MT}}) where {MT} = MB(MP.emptymonovec(MT))
