@@ -33,3 +33,7 @@ end
         @test e == monos[length(monos)+1-i]
     end
 end
+
+@testset "Coefficients" begin
+    coefficient_test(ScaledMonomialBasis, [0.2581988897471611, 0.2581988897471611, -1.2247448713915892, 1])
+end

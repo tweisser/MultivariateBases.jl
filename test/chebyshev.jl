@@ -22,3 +22,9 @@ end
     api_test(ChebyshevBasis, degree)
     api_test(ChebyshevBasisSecondKind, degree)
 end
+
+
+@testset "Coefficients" begin
+    coefficient_test(ChebyshevBasis,[0.0625, 0.0625, 0.0625, -0.25, 0.0625, -0.3125, -0.3125, 0.625])
+    coefficient_test(ChebyshevBasisSecondKind, [0.015625, 0.015625, 0.015625, -0.09375, 0.015625, -0.109375, -0.109375, 0.875])
+end

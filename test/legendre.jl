@@ -14,3 +14,7 @@ end
 @testset "API degree = $degree" for degree in 0:3
     api_test(LegendreBasis, degree)
 end
+
+@testset "Coefficients" begin
+    coefficient_test(LegendreBasis, [0.1523809523809524, 0.1523809523809524, 0.0761904761904762, -0.5714285714285714, 0.0761904761904762, -0.3428571428571428, -0.3428571428571428, 0.8] )
+end

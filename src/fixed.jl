@@ -35,3 +35,16 @@ polynomial basis for cubic polynomials in the variable `x`.
 struct FixedPolynomialBasis{PT<:MP.AbstractPolynomialLike, PV<:AbstractVector{PT}} <: AbstractPolynomialVectorBasis{PT, PV}
     elements::PV
 end
+
+
+function MP.coefficients(p, Basis::Type{<:AbstractPolynomialBasis})
+    basis = maxdegree_basis(Basis, variables(p), maxdegree(p))
+    coeffs = Float64[] # cannot use coefficient type of p
+    rem = p
+    for e in basis
+        c, rem = divrem(rem, e)
+        push!(coeffs, c)
+    end
+    idx = findall(!iszero, coeffs)
+    return coeffs[idx]
+end 

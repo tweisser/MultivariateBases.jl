@@ -22,3 +22,8 @@ end
     api_test(ProbabilistsHermiteBasis, degree)
     api_test(PhysicistsHermiteBasis, degree)
 end
+
+@testset "Coefficients" begin
+    coefficient_test(ProbabilistsHermiteBasis, [1.0, 1.0, 1.0, 9.0, 1.0, 6.0, 6.0, 4.0])
+    coefficient_test(PhysicistsHermiteBasis, [0.015625, 0.015625, 0.03125, 0.1875, 0.03125, 0.1875, 0.1875, 1.0])
+end
