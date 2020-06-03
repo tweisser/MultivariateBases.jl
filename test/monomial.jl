@@ -25,3 +25,11 @@ end
 @testset "API degree = $degree" for degree in 0:3
     api_test(MonomialBasis, degree)
 end
+
+@testset "Enumerate" begin
+    monos = [1, y, x]
+    basis = MonomialBasis(monos)
+    for (i, e) in enumerate(basis)
+        @test e == monos[length(monos)+1-i]
+    end
+end

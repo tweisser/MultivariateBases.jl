@@ -31,3 +31,11 @@ end
     @test typeof(polynomial(ones(Int, 1, 1), basis, Int)) <: AbstractPolynomial{Int}
     @test typeof(polynomial(ones(Int, 1, 1), basis, Float64)) <: AbstractPolynomial{Float64}
 end
+
+@testset "Enumerate" begin
+    monos = [1, x, y^2]
+    basis = FixedPolynomialBasis(monos)
+    for (i, e) in enumerate(basis) 
+        @test e == monos[i]
+    end
+end
