@@ -1,12 +1,12 @@
 """
     struct LaguerreBasis{P} <: AbstractMultipleOrthogonalBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = \\exp(-x)`` over the interval ``[0, \\infty]``.
 """
 struct LaguerreBasis{P} <: AbstractMultipleOrthogonalBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 
 polynomial_type(::Type{<:LaguerreBasis}, V::Type) = MP.polynomialtype(V, Float64)

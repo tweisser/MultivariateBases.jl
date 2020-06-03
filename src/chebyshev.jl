@@ -8,13 +8,13 @@ reccurence_deno_coef(::Type{<:AbstractChebyshevBasis}, degree) = 1
 
 """
     struct ChebyshevBasisFirstKind{P} <: AbstractChebyshevBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = \\frac{1}{\\sqrt{1 - x^2}}`` over the interval ``[-1, 1]``.
 """
 struct ChebyshevBasisFirstKind{P} <: AbstractChebyshevBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 
 const ChebyshevBasis{P} = ChebyshevBasisFirstKind{P}
@@ -23,13 +23,13 @@ degree_one_univariate_polynomial(::Type{<:ChebyshevBasisFirstKind}, variable::MP
 
 """
     struct ChebyshevBasisSecondKind{P} <: AbstractChebyshevBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = \\sqrt{1 - x^2}`` over the interval ``[-1, 1]``.
 """
 struct ChebyshevBasisSecondKind{P} <: AbstractChebyshevBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 
 degree_one_univariate_polynomial(::Type{<:ChebyshevBasisSecondKind}, variable::MP.AbstractVariable) = MA.@rewrite(2variable + 0)

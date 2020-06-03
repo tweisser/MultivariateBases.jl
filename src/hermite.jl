@@ -9,13 +9,13 @@ reccurence_deno_coef(::Type{<:AbstractHermiteBasis}, degree) = 1
 
 """
     struct ProbabilistsHermiteBasis{P} <: AbstractHermiteBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = \\exp(-x^2/2)`` over the interval ``[-\\infty, \\infty]``.
 """
 struct ProbabilistsHermiteBasis{P} <: AbstractHermiteBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 reccurence_first_coef(::Type{<:ProbabilistsHermiteBasis}, degree) = 1
 reccurence_third_coef(::Type{<:ProbabilistsHermiteBasis}, degree) = -(degree - 1)
@@ -23,13 +23,13 @@ degree_one_univariate_polynomial(::Type{<:ProbabilistsHermiteBasis}, variable::M
 
 """
     struct PhysicistsHermiteBasis{P} <: AbstractHermiteBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = \\exp(-x^2)`` over the interval ``[-\\infty, \\infty]``.
 """
 struct PhysicistsHermiteBasis{P} <: AbstractHermiteBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 reccurence_first_coef(::Type{<:PhysicistsHermiteBasis}, degree) = 2
 reccurence_third_coef(::Type{<:PhysicistsHermiteBasis}, degree) = -2(degree - 1)

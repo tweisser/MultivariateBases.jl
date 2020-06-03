@@ -1,6 +1,6 @@
 """
     struct AbstractGegenbauerBasis{P} <: AbstractMultipleOrthogonalBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = (1 - x^2)^{\\alpha - 1/2}`` over the interval ``[-1, 1]``.
@@ -12,13 +12,13 @@ reccurence_second_coef(::Type{<:AbstractGegenbauerBasis}, degree) = 0
 
 """
     struct LegendreBasis{P} <: AbstractGegenbauerBasis{P}
-        polynomials::Vector{P}
+        elements::Vector{P}
     end
 
 Orthogonal polynomial with respect to the univariate weight function ``w(x) = 1`` over the interval ``[-1, 1]``.
 """
 struct LegendreBasis{P} <: AbstractGegenbauerBasis{P}
-    polynomials::Vector{P}
+    elements::Vector{P}
 end
 
 polynomial_type(::Type{<:LegendreBasis}, V::Type) = MP.polynomialtype(V, Float64)
