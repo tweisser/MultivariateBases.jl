@@ -49,6 +49,9 @@ Base.length(basis::AbstractPolynomialBasis) = length(basis.elements)
 Base.copy(basis::AbstractPolynomialBasis) = typeof(basis)(copy(basis.elements))
 Base.iterate(basis::AbstractPolynomialBasis) = iterate(basis.elements)
 Base.iterate(basis::AbstractPolynomialBasis, s) = iterate(basis.elements, s)
+Base.:(==)(basis1::BT, basis2::BT) where {BT<:AbstractPolynomialBasis} = basis1.elements == basis2.elements
 
 MP.nvariables(basis::AbstractPolynomialBasis) = MP.nvariables(basis.elements)
 MP.variables(basis::AbstractPolynomialBasis) = MP.variables(basis.elements)
+
+
