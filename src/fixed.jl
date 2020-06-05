@@ -36,14 +36,14 @@ struct FixedPolynomialBasis{PT<:MP.AbstractPolynomialLike, PV<:AbstractVector{PT
     elements::PV
 end
 
-
 function MP.coefficients(p, Basis::Type{<:AbstractPolynomialBasis})
     basis = maxdegree_basis(Basis, variables(p), maxdegree(p))
-    coeffs = Float64[] # cannot use coefficient type of p
+    coeffs = promote_type(coefficienttype(p), Float64)[] # cannot use coefficient type of p
     rem = p
     for e in basis
         c, rem = divrem(rem, e)
-        push!(coeffs, c)
+        @assert maxdegree(c) == 0
+        push!(coeffs, first(coefficients(c)))
     end
     idx = findall(!iszero, coeffs)
     return coeffs[idx]
