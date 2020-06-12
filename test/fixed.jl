@@ -39,3 +39,17 @@ end
         @test e == monos[i]
     end
 end
+
+@testset "Coefficients" begin
+    @polyvar x y
+    p = x^4*y^2 + x^2*y^4 - 3*x^2*y^2 + 1
+    basis = FixedPolynomialBasis([x^4*y^2, x^2*y^4, x^2*y^2, 1])
+    coefs = coefficients(p)
+    cc = coefficients(p, basis)
+    for (i, c) in enumerate(cc)
+        @test isapprox(c, coefs[i])
+    end
+
+    @test isapprox(p, polynomial(cc, basis ))
+    
+end
