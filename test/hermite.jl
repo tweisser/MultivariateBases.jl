@@ -9,6 +9,7 @@ using MultivariateBases
         x^3 - 3x,
         x^4 - 6x^2 + 3
     ], true)
+    univ_orthogonal_test(ProbabilistsHermiteBasis, i-> √(2*π)*factorial(i))
     orthogonal_test(PhysicistsHermiteBasis, x -> [
         1,
         2x,
@@ -16,6 +17,7 @@ using MultivariateBases
         8x^3 - 12x,
         16x^4 - 48x^2 + 12
     ], true)
+    univ_orthogonal_test(PhysicistsHermiteBasis, i-> √(π)*factorial(i)*2^i, atol = 1e-12) #precision issue
 end
 
 @testset "API degree = $degree" for degree in 0:3

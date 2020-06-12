@@ -28,3 +28,15 @@ reccurence_third_coef(::Type{<:LegendreBasis}, degree) = -(degree - 1)
 reccurence_deno_coef(::Type{<:LegendreBasis}, degree) = degree
 
 degree_one_univariate_polynomial(::Type{<:LegendreBasis}, variable::MP.AbstractVariable) = MA.@rewrite(variable + 0)
+
+function scalar_product_function(::Type{<:LegendreBasis})
+    function sp(i::Int)
+        if mod(i, 2) == 1
+            return 0
+        else
+            return 2/(i+1)
+        end
+    end
+    return sp
+end
+

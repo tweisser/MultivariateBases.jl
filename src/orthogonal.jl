@@ -126,3 +126,32 @@ function basis_covering_monomials(B::Type{<:AbstractMultipleOrthogonalBasis}, mo
     end
     return _basis_from_monomials(B, variables(monos), MP.monovec(collect(m)))
 end
+
+"""
+    scalar_product_function(basis::Type{<:AbstractMultipleOrthogonalBasis}) 
+
+Return the function ::Int -> T<:Real, i -> <1,x^i> where <.,.> is the inner product for which basis is orthogonal. 
+"""
+function scalar_product_function(::Type{<:AbstractMultipleOrthogonalBasis}) end
+
+LinearAlgebra.dot(p, q, basis_type::Type{<:AbstractMultipleOrthogonalBasis}) = _integral(p*q, basis_type)
+
+function _integral(p::Number, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
+    return p*scalar_product_function(basis_type)(0)
+end
+
+function _integral(p::MP.AbstractVariable, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
+    return scalar_product_function(basis_type)(1)
+end
+
+function _integral(p::MP.AbstractMonomial, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
+    return prod([scalar_product_function(basis_type)(i) for i in exponents(p)])
+end
+
+function _integral(p::MP.AbstractTerm, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
+    return coefficient(p)*_integral(monomial(p), basis_type)
+end
+
+function _integral(p::MP.AbstractPolynomial, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
+    return sum([_integral(t, basis_type) for t in terms(p)])
+end

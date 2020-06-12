@@ -9,6 +9,8 @@ using MultivariateBases
         (5x^3 - 3x) / 2,
         (35x^4 - 30x^2 + 3) / 8
     ], true)
+
+    univ_orthogonal_test(LegendreBasis, i -> 2/(2*i+1))
 end
 
 @testset "API degree = $degree" for degree in 0:3

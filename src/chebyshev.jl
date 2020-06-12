@@ -21,6 +21,20 @@ const ChebyshevBasis{P} = ChebyshevBasisFirstKind{P}
 
 degree_one_univariate_polynomial(::Type{<:ChebyshevBasisFirstKind}, variable::MP.AbstractVariable) = MA.@rewrite(variable + 0)
 
+function scalar_product_function(::Type{<:ChebyshevBasisFirstKind})
+    function sp(i::Int)
+        if i == 0
+            return π
+        elseif mod(i, 2) == 1
+            return 0
+        else
+            n = Int(i/2)
+            return π*factorial(i)/(2^i * factorial(n)^2)
+        end
+    end
+    return sp
+end
+
 """
     struct ChebyshevBasisSecondKind{P} <: AbstractChebyshevBasis{P}
         elements::Vector{P}
@@ -33,3 +47,19 @@ struct ChebyshevBasisSecondKind{P} <: AbstractChebyshevBasis{P}
 end
 
 degree_one_univariate_polynomial(::Type{<:ChebyshevBasisSecondKind}, variable::MP.AbstractVariable) = MA.@rewrite(2variable + 0)
+
+
+function scalar_product_function(::Type{<:ChebyshevBasisSecondKind})
+    function sp(i::Int)
+        if i == 0
+            return π/2
+        elseif mod(i, 2) == 1
+            return 0
+        else
+            n = Int(i/2)
+            return π*factorial(i)/(2^(i+1) * factorial(n) * factorial(n +1))
+        end
+    end
+    return sp
+end
+

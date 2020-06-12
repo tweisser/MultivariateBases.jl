@@ -1,8 +1,9 @@
 using Test
 
 using MultivariateBases
-
+using LinearAlgebra
 using DynamicPolynomials
+
 
 function api_test(B::Type{<:AbstractPolynomialBasis}, degree)
     @polyvar x[1:2]
@@ -22,6 +23,17 @@ function api_test(B::Type{<:AbstractPolynomialBasis}, degree)
         @test polynomial(i -> 0.0, basis) isa polynomialtype(basis, Float64)
         @test polynomial(zeros(n, n), basis, Float64) isa polynomialtype(basis, Float64)
         @test polynomial(ones(n, n), basis, Float64) isa polynomialtype(basis, Float64)
+    end
+end
+
+function univ_orthogonal_test(B::Type{<:AbstractMultipleOrthogonalBasis}, univ::Function; kwargs...)
+    @polyvar x
+    basis = maxdegree_basis(B, [x], 4)
+    for i = 1:length(basis)
+        @test isapprox(dot(basis[i], basis[i], B), univ(maxdegree(basis[i])); kwargs...)
+        for j = 1:i-1
+            @test isapprox(dot(basis[i], basis[j], B), 0.0; kwargs...)
+        end
     end
 end
 

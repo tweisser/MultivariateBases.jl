@@ -9,6 +9,7 @@ using MultivariateBases
         4x^3 - 3x,
         8x^4 - 8x^2 + 1
     ], true)
+    univ_orthogonal_test(ChebyshevBasis, i -> π*(1/2 + (0^i)/2))
     orthogonal_test(ChebyshevBasisSecondKind, x -> [
         1,
         2x,
@@ -16,6 +17,8 @@ using MultivariateBases
         8x^3 - 4x,
         16x^4 - 12x^2 + 1
     ], true)
+
+    univ_orthogonal_test(ChebyshevBasisSecondKind, i -> π/2)
 end
 
 @testset "API degree = $degree" for degree in 0:3
