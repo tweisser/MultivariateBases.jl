@@ -72,16 +72,16 @@ function orthogonal_test(B::Type{<:AbstractMultipleOrthogonalBasis}, univ::Funct
     end
 end
 
-function coefficient_test(B::Type{<:AbstractPolynomialBasis}, coefs)
+function coefficient_test(B::Type{<:AbstractPolynomialBasis}, coefs; kwargs...)
     @polyvar x y
     p = x^4*y^2 + x^2*y^4 - 3*x^2*y^2 + 1
     cc = coefficients(p, B)
     for (i, c) in enumerate(cc)
-        @test c == coefs[i]
+        @test isapprox(c, coefs[i]; kwargs...)
     end
 
     mons = basis_covering_monomials(B, monomials(p))
-    @test isapprox(p, polynomial(cc, mons))
+    @test isapprox(p, polynomial(cc, mons); kwargs...)
     
 end
 

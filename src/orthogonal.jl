@@ -155,3 +155,10 @@ end
 function _integral(p::MP.AbstractPolynomial, basis_type::Type{<:AbstractMultipleOrthogonalBasis})
     return sum([_integral(t, basis_type) for t in terms(p)])
 end
+
+function MP.coefficients(p, basis::AbstractMultipleOrthogonalBasis; check = true)
+    B = typeof(basis)
+    coeffs = [LinearAlgebra.dot(p, el, B)/LinearAlgebra.dot(el, el, B) for el in basis]
+    idx = findall(c -> !isapprox(c, 0, atol = 1e-10), coeffs)
+    return coeffs[idx]
+end 
