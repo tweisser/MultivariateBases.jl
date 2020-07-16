@@ -20,9 +20,7 @@ reccurence_deno_coef(::Type{<:LaguerreBasis}, degree) = degree
 
 degree_one_univariate_polynomial(::Type{<:LaguerreBasis}, variable::MP.AbstractVariable) = MA.@rewrite(1 - variable)
 
-function scalar_product_function(::Type{<:LaguerreBasis})
-    function sp(i::Int)
-        return factorial(i) 
-    end
+function scalar_product_function(::Type{<:LaguerreBasis}, i::Int)
+    return factorial(i) 
 end
 
